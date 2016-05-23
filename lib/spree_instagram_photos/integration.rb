@@ -6,6 +6,8 @@ module SpreeInstagramPhotos
       return unless tag.is_a? String
       begin
         photos = Instagram.tag_recent_media(tag, args)
+	puts photos.present?
+	puts "instagram method running"
         return nil unless photos.present?
         photos.map(&:images).collect{|i| Hashie::Mash.new(thumbnail: i.thumbnail.url, full: i.standard_resolution.url) }
       rescue Exception => e
